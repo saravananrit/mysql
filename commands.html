@@ -1,353 +1,78 @@
-MySQL command-line client Commands
-Connect to MySQL server using mysql  command-line client with a username and password (MySQL will prompt for a password):
-
-mysql -u [username] -p;
-Code language: SQL (Structured Query Language) (sql)
-Connect to MySQL Server with a specified database using a username and password:
-
-mysql -u [username] -p [database];
-Code language: SQL (Structured Query Language) (sql)
-Exit mysql command-line client:
-
-exit;
-Code language: SQL (Structured Query Language) (sql)
-Export data using mysqldump tool
-
-mysqldump -u [username] -p [database] > data_backup.sql;
-Code language: SQL (Structured Query Language) (sql)
-To clear MySQL screen console window on Linux, you use the following command:
-
-mysql> system clear;
-Code language: SQL (Structured Query Language) (sql)
-Currently, there is no command available on Windows OS for clearing MySQL screen console window.
-
-Working with databases
-Create a database with a specified name if it does not exist in the database server
-
-CREATE DATABASE [IF NOT EXISTS] database_name;
-Code language: SQL (Structured Query Language) (sql)
-Use a database or change the current database to another database that you are working with:
-
-USE database_name;
-Code language: SQL (Structured Query Language) (sql)
-Drop a database with a specified name permanently. All physical files associated with the database will be deleted.
-
-DROP DATABASE [IF EXISTS] database_name;
-Code language: SQL (Structured Query Language) (sql)
-Show all available databases in the current MySQL database server
-
-SHOW DATABASE;
-Code language: SQL (Structured Query Language) (sql)
-Working with tables
-Show all tables in a current database.
-
-SHOW TABLES;
-Code language: SQL (Structured Query Language) (sql)
-Create a new table
-
-CREATE TABLE [IF NOT EXISTS] table_name(
-  column_list
-);
-Code language: SQL (Structured Query Language) (sql)
-Add a new column into a table:
-
-ALTER TABLE table 
-ADD [COLUMN] column_name;
-Code language: SQL (Structured Query Language) (sql)
-Drop a column from a table:
-
-ALTER TABLE table_name
-DROP [COLUMN] column_name;
-Code language: SQL (Structured Query Language) (sql)
-Add index with a specific name to a table on a column:
-
-ALTER TABLE table 
-ADD INDEX [name](column, ...);
-Code language: SQL (Structured Query Language) (sql)
-Add primary key into a table:
-
-ALTER TABLE table_name 
-ADD PRIMARY KEY (column_name,...);
-Remove the primary key of a table:
-
-ALTER TABLE table_name
-DROP PRIMARY KEY;
-Drop a table:
-
-DROP TABLE [IF EXISTS] table_name;
-Code language: SQL (Structured Query Language) (sql)
-Show the columns of a table:
-
-DESCRIBE table_name;
-Code language: SQL (Structured Query Language) (sql)
-Show the information of a column in a table:
-
-DESCRIBE table_name column_name;
-Code language: SQL (Structured Query Language) (sql)
-Working with indexes
-Creating an index with the specified name on a table:
-
-CREATE INDEX index_name
-ON table_name (column,...);
-Code language: SQL (Structured Query Language) (sql)
-Drop an index:
-
-DROP INDEX index_name;
-Code language: SQL (Structured Query Language) (sql)
-Create a unique index:
-
-CREATE UNIQUE INDEX index_name 
-ON table_name (column,...);
-Code language: SQL (Structured Query Language) (sql)
-Working with views
-Create a new view:
-
-CREATE VIEW [IF NOT EXISTS] view_name 
-AS 
-  select_statement;
-Code language: SQL (Structured Query Language) (sql)
-Create a new view with the WITH CHECK OPTION:
-
-CREATE VIEW [IF NOT EXISTS] view_name 
-AS select_statement
-WITH CHECK OPTION;
-Code language: SQL (Structured Query Language) (sql)
-Create or replace a view:
-
-CREATE OR REPLACE view_name 
-AS 
-select_statement;
-Code language: SQL (Structured Query Language) (sql)
-Drop a view:
-
-DROP VIEW [IF EXISTS] view_name;
-Code language: SQL (Structured Query Language) (sql)
-Drop multiple views:
-
-DROP VIEW [IF EXISTS] view1, view2, ...;
-Code language: SQL (Structured Query Language) (sql)
-Rename a view:
-
-RENAME TABLE view_name
-TO new_view_name;
-Code language: SQL (Structured Query Language) (sql)
-Show views from a database:
-
-SHOW FULL TABLES
-[{FROM | IN } database_name]
-WHERE table_type = 'VIEW';
-Code language: SQL (Structured Query Language) (sql)
-Working with triggers
-Create a new trigger:
-
-CREATE TRIGGER trigger_name
-{BEFORE | AFTER} {INSERT | UPDATE| DELETE }
-ON table_name FOR EACH ROW
-trigger_body;
-Code language: SQL (Structured Query Language) (sql)
-Drop a trigger:
-
-DROP TRIGGER [IF EXISTS] trigger_name;
-Code language: SQL (Structured Query Language) (sql)
-Show triggers in a database:
-
-SHOW TRIGGERS
-[{FROM | IN} database_name]
-[LIKE 'pattern' | WHERE search_condition];
-Code language: SQL (Structured Query Language) (sql)
-Working with stored procedures
-Create a stored procedure:
-
-DELIMITER $$
-
-CREATE PROCEDURE procedure_name(parameter_list)
-BEGIN
-   body;
-END $$
-
-DELIMITER ;
-Code language: SQL (Structured Query Language) (sql)
-Drop a stored procedure:
-
-DROP PROCEDURE [IF EXISTS] procedure_name;
-Code language: SQL (Structured Query Language) (sql)
-Show stored procedures:
-
-SHOW PROCEDURE STATUS 
-[LIKE 'pattern' | WHERE search_condition];
-Code language: SQL (Structured Query Language) (sql)
-Working with stored functions
-Create a new stored function:
-
-DELIMITER $$
- 
-CREATE FUNCTION function_name(parameter_list)
-RETURNS datatype
-[NOT] DETERMINISTIC
-BEGIN
- -- statements
-END $$
- 
-DELIMITER ;
-Code language: SQL (Structured Query Language) (sql)
-Drop a stored function:
-
-DROP FUNCTION [IF EXISTS] function_name;
-Code language: SQL (Structured Query Language) (sql)
-Show stored functions:
-
-SHOW FUNCTION STATUS 
-[LIKE 'pattern' | WHERE search_condition];
-Code language: SQL (Structured Query Language) (sql)
-Querying data from tables
-Query all data from a table:
-
-SELECT * FROM table_name;
-Code language: SQL (Structured Query Language) (sql)
-Query data from one or more column of a table:
-
-SELECT 
-    column1, column2, ...
-FROM 
-    table_name;
-Code language: SQL (Structured Query Language) (sql)
-Remove duplicate rows from the result of a query:
-
-SELECT 
-    DISTINCT (column)
-FROM 
-   table_name;
-Code language: SQL (Structured Query Language) (sql)
-Query data with a filter using a WHERE clause:
-
-SELECT select_list
-FROM table_name
-WHERE condition;
-Code language: SQL (Structured Query Language) (sql)
-Change the output of the column name using column alias:
-
-SELECT 
-    column1 AS alias_name,
-    expression AS alias,
-    ...
-FROM 
-    table_name;
-Code language: SQL (Structured Query Language) (sql)
-Query data from multiple tables using inner join:
-
-SELECT select_list
-FROM table1
-INNER JOIN table2 ON condition;
-Code language: SQL (Structured Query Language) (sql)
-Query data from multiple tables using left join:
-
-SELECT select_list
-FROM table1 
-LEFT JOIN table2 ON condition;
-Code language: SQL (Structured Query Language) (sql)
-Query data from multiple tables using right join:
-
-SELECT select_list 
-FROM table1 
-RIGHT JOIN table2 ON condition;
-Code language: SQL (Structured Query Language) (sql)
-Make a Cartesian product of rows:
-
-SELECT select_list
-FROM table1
-CROSS JOIN table2;
-Code language: SQL (Structured Query Language) (sql)
-Counting rows in a table.
-
-SELECT COUNT(*)
-FROM table_name;
-Code language: SQL (Structured Query Language) (sql)
-Sorting a result set:
-
-SELECT 
-    select_list
-FROM 
-    table_name
-ORDER BY 
-    column1 ASC [DESC], 
-    column2 ASC [DESC];
-Code language: SQL (Structured Query Language) (sql)
-Group rows using the GROUP BY clause.
-
-SELECT select_list
-FROM table_name
-GROUP BY column_1, column_2, ...;
-Code language: SQL (Structured Query Language) (sql)
-Filter group using the HAVING clause:
-
-SELECT select_list
-FROM table_name
-GROUP BY column1
-HAVING condition;
-Code language: SQL (Structured Query Language) (sql)
-Modifying data in tables
-Insert a new row into a table:
-
-INSERT INTO table_name(column_list)
-VALUES(value_list);
-Code language: SQL (Structured Query Language) (sql)
-Insert multiple rows into a table:
-
-INSERT INTO table_name(column_list)
-VALUES(value_list1),
-      (value_list2),
-      (value_list3),
-      ...;
-Code language: SQL (Structured Query Language) (sql)
-Update all rows in a table:
-
-UPDATE table_name
-SET column1 = value1,
-    ...;
-Code language: SQL (Structured Query Language) (sql)
-Update data for a set of rows specified by a condition in WHERE clause.
-
-UPDATE table_name
-SET column_1 = value_1,
-    ...
-WHERE condition
-Code language: SQL (Structured Query Language) (sql)
-Update with join
-
-UPDATE 
-    table1, 
-    table2
-INNER JOIN table1 ON table1.column1 = table2.column2
-SET column1 = value1,
-WHERE condition;
-Code language: SQL (Structured Query Language) (sql)
-Delete all rows in a table
-
-DELETE FROM table_name;
-Code language: SQL (Structured Query Language) (sql)
-Delete rows specified by a condition:
-
-DELETE FROM table_name
-WHERE condition;
-Code language: SQL (Structured Query Language) (sql)
-Delete with join
-
-DELETE table1, table2
-FROM table1
-INNER JOIN table2
-    ON table1.column1 = table2.column2
-WHERE condition;
-Code language: SQL (Structured Query Language) (sql)
-Searching
-Search for data using the LIKE operator:
-
-SELECT select_list
-FROM table_name
-WHERE column LIKE '%pattern%';
-Code language: SQL (Structured Query Language) (sql)
-Text search using a regular expression with RLIKE operator.
-
-SELECT select_list
-FROM table_name
-WHERE column RLIKE 'regular_expression';
-Code language: SQL (Structured Query Language) (sql)
+<!-- ######## This is a comment, visible only in the source editor  ######## -->
+<h1 style="color: #4485b8;">You can edit <span style="background-color: #4485b8; color: #ffffff; padding: 0 5px;">this demo</span> text!</h1>
+<p><strong style="color: #000;">Basic usage:</strong> Paste your documents in the visual editor on the left or your HTML code in the source editor in the right. <br />Edit any of the two areas and see the other changing in real time.&nbsp;</p>
+<h4>Use the table below to test most of the features</h4>
+<table class="editorDemoTable" style="vertical-align: top;">
+<thead>
+<tr>
+<td>Title</td>
+<td>Description 1</td>
+<td>Description 2</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="min-width: 140px;"><strong>Inline styles</strong></td>
+<td>Using <span style="font-weight: bold; color: #000; text-decoration: underline;">inline styles</span> in your HTML document is a bad practice because <strong style="font-weight: normal; font-size: 1.1em; color: #00a; font-family: monospace; letter-spacing: -2px;">they break the default styles of the website</strong>!</td>
+<td>Use classes and IDs instead!
+<div style="height: 20px; width: 100%; border: 3px dotted #888; background-color: rgba(0,0,0,0.2);">&nbsp;</div>
+</td>
+</tr>
+<tr>
+<td><strong>Setting margins</strong></td>
+<td style="background-color: rgba(0,0,0,0.1);">
+<p>&nbsp;&nbsp;&nbsp;Do not use &nbsp; &nbsp; &nbsp; &nbsp;spaces &nbsp; &nbsp; &nbsp;or &nbsp; &nbsp; &nbsp; empty paragraphs</p>
+<p>&nbsp;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;to set vertical and horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gaps.</p>
+</td>
+<td><span style="line-height: 35px;">&larr;| &nbsp;Use <span style="margin: 5px;">margin, &nbsp;&nbsp;</span> <span style="padding: 5px;">padding, &nbsp; &rarr;|</span> <br />and line-height instead <strong style="font-size: 20px;">↕</strong> </span></td>
+</tr>
+<tr>
+<td><strong>Links and images</strong></td>
+<td><a style="font-weight: bold; color: #000; cursor: pointer; text-decoration: underline;" title="Demo link" href="https://html-online.com" target="_blank">This is a text link</a> and this is an image: <img style="border: 2px solid #4485b8; border-radius: 15px;" src="/images/smiley.png" alt="laughing" width="20" height="20" /></td>
+<td>And this is a link image: <a style="cursor: pointer;" title="Image link" href="https://html-cleaner.com" target="_blank"><img src="/images/smiley.png" alt="smiley" /></a></td>
+</tr>
+<tr>
+<td><strong>Tables and lists</strong></td>
+<td>
+<table style="margin: auto; box-shadow: 3px 3px 10px #000;" border="1">
+<tbody>
+<tr style="border-top: 2px solid #555;">
+<td style="border: 2px dashed #555;">First cell</td>
+<td>Second column</td>
+<td>Upper corner</td>
+</tr>
+<tr style="background-color: rgba(0,0,0,0.1);">
+<td>Bottom row</td>
+<td>Middle bottom</td>
+<td>Right corner</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+<ol>
+<li>Demonstrating an ordered list</li>
+<li>These are&nbsp;special characters: <span style="color: red; font-size: 17px;">&hearts;</span> <strong style="font-size: 20px;">☺ ★</strong> &gt;&lt;</li>
+<li>item 2</li>
+</ol>
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>Floating an image</strong></td>
+<td>
+<h4>Floating with inline style</h4>
+<p><img style="margin: 0 0 5px 20px; float: right;" src="https://htmlg.com/images/demo-image.jpg" alt="Castle" width="155" height="156" />Lorem&nbsp;ipsum dolor sit amet, nonumes voluptatum mel ea, cu case ceteros cum. Novum commodo malorum vix ut. Dolores consequuntur in ius, sale electram dissentiunt quo te. Cu duo omnes invidunt, eos eu mucius fabellas. Stet facilis ius te, quando voluptatibus eos in. Ad vix mundi alterum, integre urbanitas intellegam vix in.</p>
+</td>
+<td>
+<h4>Floating with classes</h4>
+<p><img class="imageRight" src="https://htmlg.com/images/demo-image.jpg" alt="Dover" width="155" height="156" />Lorem&nbsp;ipsum dolor sit amet, nonumes voluptatum mel ea, cu case ceteros cum. Novum commodo malorum vix ut. Dolores consequuntur in ius, sale electram dissentiunt quo te. Cu duo omnes invidunt, eos eu mucius fabellas. Stet facilis ius te, quando voluptatibus eos in. Ad vix mundi alterum, integre urbanitas intellegam vix in.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>Set up the cleaning options and click the <span style="background-color: #4485b8; color: #fff; display: inline-block; padding: 2px 8px; font-weight: bold; border-radius: 5px;">Clean</span> button, try the <strong>Tag manager</strong>, or experiment with the <strong>Find and replace tool</strong>.</p>
+<p><em>You can always access this demonstration text clicking the <strong>DEMO</strong> menu item.</em></p>
+<hr />
+<p><em>&copy; htmlg.com</em></p>
