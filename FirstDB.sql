@@ -105,6 +105,9 @@ CREATE TABLE parts (
     price DECIMAL(10,2) NOT NULL CHECK (price >= 0)
 );
 
+--Insert VALUES
+
+
 --show tables;
 SHOW CREATE TABLE parts;
 
@@ -193,5 +196,4 @@ select * from Players1;
 
 --rollback or undo changes
 --rollback Players1;
-
 
